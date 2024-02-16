@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     getMovieList();
-  }, [movieList]);
+  }, [movieList]);  // Actualizamos página
 
   const onSubmitMovie = async () => {
     try {

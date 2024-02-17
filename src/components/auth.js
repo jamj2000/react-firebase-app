@@ -10,7 +10,7 @@ export const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = async () => {
+  const login = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
@@ -18,7 +18,7 @@ export const Auth = () => {
     }
   };
 
-  const signInWithGoogle = async () => {
+  const loginGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
@@ -35,21 +35,29 @@ export const Auth = () => {
   };
 
   return (
-    <div>
-      <input
-        placeholder="Email..."
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        placeholder="Password..."
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={signIn}> Sign In</button>
+    <div className="Auth">
+      {
+        !auth.currentUser
 
-      <button onClick={signInWithGoogle}> Sign In With Google</button>
+          ? <div>
+            <input
+              placeholder="Email..."
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              placeholder="Password..."
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={login}>Login</button>
 
-      <button onClick={logout}> Logout </button>
+            <button onClick={loginGoogle}>Login con Google</button>
+          </div>
+
+          : <div>{auth.currentUser.displayName} / {auth.currentUser.email}
+            <button onClick={logout}>  Logout </button>
+          </div>
+      }
     </div>
   );
 };

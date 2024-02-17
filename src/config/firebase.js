@@ -6,13 +6,12 @@ import { getStorage } from "firebase/storage";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAkEBq6hkRiF7Giu6UJTPCihrBK0QeG46E",
-  authDomain: "proyecto-f21b6.firebaseapp.com",
-  projectId: "proyecto-f21b6",
-  storageBucket: "proyecto-f21b6.appspot.com",
-  messagingSenderId: "142019119422",
-  appId: "1:142019119422:web:d15fb66a92636a29ad046f",
-  measurementId: "G-P5WLPBG40L"
+  apiKey: "AIzaSyDPBSmcqPhFRGucE32MfUHsfVViHLWGEGA",
+  authDomain: "peliculas-dcaf4.firebaseapp.com",
+  projectId: "peliculas-dcaf4",
+  storageBucket: "peliculas-dcaf4.appspot.com",
+  messagingSenderId: "627389868124",
+  appId: "1:627389868124:web:bae0891bffab5febfc1e99"
 };
 
 // Initialize Firebase

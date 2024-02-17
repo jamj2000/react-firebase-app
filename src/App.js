@@ -30,8 +30,8 @@ function App() {
 
   const getMovieList = async () => {
     try {
-      const data = await getDocs(videosCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
+      const {docs} = await getDocs(videosCollectionRef);
+      const filteredData = docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
@@ -41,9 +41,9 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    getMovieList();
-  }, [movieList]);  // Actualizamos página
+  // useEffect(() => {
+  //   getMovieList()
+  // });  // Actualizamos página
 
   const onSubmitMovie = async () => {
     try {
@@ -85,11 +85,11 @@ function App() {
 
       <div>
         <input
-          placeholder="Movie title..."
+          placeholder="Título peli..."
           onChange={(e) => setNewMovieTitle(e.target.value)}
         />
         <input
-          placeholder="Release Date..."
+          placeholder="Año estreno..."
           type="number"
           onChange={(e) => setNewReleaseDate(Number(e.target.value))}
         />
@@ -98,28 +98,31 @@ function App() {
           checked={isNewMovieOscar}
           onChange={(e) => setIsNewMovieOscar(e.target.checked)}
         />
-        <label> Received an Oscar</label>
-        <button onClick={onSubmitMovie}> Submit Movie</button>
+        <label> 🏆 Recibió un Oscar</label>
+        <button onClick={onSubmitMovie}>Nueva peli</button>
       </div>
       <div>
-        {movieList.map((movie) => (
-          <div>
-            <h1 style={{ color: movie.receivedAnOscar ? "green" : "red" }}>
-              {movie.title}
-            </h1>
-            <p> Date: {movie.releaseDate} </p>
-
-            <button onClick={() => deleteMovie(movie.id)}> Delete Movie</button>
-
-            <input
-              placeholder="new title..."
-              onChange={(e) => setUpdatedTitle(e.target.value)}
-            />
-            <button onClick={() => updateMovieTitle(movie.id)}>
-              {" "}
-              Update Title
-            </button>
-          </div>
+        {movieList.map((peli) => (
+             <div key={peli.id}>
+             <h1 style={{ color: peli.receivedAnOscar ? "green" : "red" }}>
+                 {peli.receivedAnOscar ? '🏆' + peli.title : peli.title}
+             </h1>
+             <p> Año: {peli.releaseDate} </p>
+ 
+             <input
+                 placeholder="new title..."
+                 onChange={(e) => setUpdatedTitle(e.target.value)}
+                 defaultValue={peli.title}
+             />
+             <button onClick={() => updateMovieTitle(peli.id)}>
+                 ✏️ Actualizar peli
+             </button>
+ 
+             <button onClick={() => deleteMovie(peli.id)}>
+                 ❌ Eliminar peli
+             </button>
+ 
+         </div>
         ))}
       </div>
 
